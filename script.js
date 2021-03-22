@@ -1,10 +1,25 @@
 $(function() {
     let $mainMenuItems = $('#main-menu ul').children('li');
     let $totalMainMenuItems = $mainMenuItems.length;
-    let $openedIndex = -1;
+    let $openedIndex = 2;
    
     function init () {
 
+        bindEvents();
+        //verifie l'index puis ovrir l'item
+        if(validIndex($openedIndex)){
+            animateItem($mainMenuItems.eq($openedIndex),true,700);
+        }
+        
+    };
+
+    function validIndex($indeToCheck){
+
+        return ($indeToCheck>= 0) && ($indeToCheck < $totalMainMenuItems);
+    };
+
+    // tout les events 
+    function bindEvents (){
         $mainMenuItems.children('.images').click(function(){
             
             let $newIndex = $(this).parent().index();//je recupere le parent et son index
@@ -23,12 +38,8 @@ $(function() {
                 
             }
         });
-    };
+    }
 
-    function validIndex($indeToCheck){
-
-        return ($indeToCheck>= 0) && ($indeToCheck < $totalMainMenuItems);
-    };
 
     function animateItem($item, $toOpen,$speed) {
 
